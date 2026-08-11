@@ -72,7 +72,6 @@
     </div>
 
     <script>
-<script>
         const tg = window.Telegram.WebApp;
         tg.ready();
         tg.expand();
@@ -90,11 +89,9 @@
                 tg.HapticFeedback.notificationOccurred('success');
             }
 
-            // Останавливаем камеру после успешного считывания
             html5QrCode.stop().catch(err => console.log(err));
         }
 
-        // Привязываем клик через JS
         document.getElementById('send-btn').addEventListener('click', function() {
             if (scannedResult) {
                 tg.sendData(scannedResult);
@@ -111,3 +108,5 @@
             html5QrCode.start({ facingMode: "user" }, { fps: 15, qrbox: { width: 200, height: 200 } }, onScanSuccess);
         });
     </script>
+</body>
+</html>
