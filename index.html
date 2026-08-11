@@ -9,7 +9,7 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--tg-theme-bg-color, #17212b);
             color: var(--tg-theme-text-color, #ffffff);
             display: flex;
@@ -55,6 +55,8 @@
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
             margin-top: 10px;
         }
     </style>
@@ -67,7 +69,8 @@
 
         <div id="result-box">
             <p id="scanned-text" style="color: #4cd964; font-weight: bold; margin-bottom: 8px;"></p>
-            <button class="btn" onclick="sendDataToBot()">📤 Отправить боту</button>
+            <!-- Ссылка сразу открывает твоего бота с переданным ID! -->
+            <a id="bot-link" href="#" class="btn">🚀 Открыть профиль в боте</a>
         </div>
     </div>
 
@@ -76,26 +79,21 @@
         tg.ready();
         tg.expand();
 
-        let foundData = "";
+        // Сюда вставь имя своего бота в телеграме (без @)
+        const BOT_USERNAME = "JasVolonteers_bot";
 
         function onScanSuccess(decodedText) {
-            foundData = decodedText;
-            document.getElementById('scanned-text').innerText = "✅ Считано: " + decodedText;
+            // decodedText должен быть вида user_123456
+            document.getElementById('scanned-text').innerText = "✅ Успешно считано!";
+
+            // Формируем ссылку на бота с deep link (например t.me/bot?start=scan_123456)
+            const deepLinkUrl = `https://t.me/${BOT_USERNAME}?start=scan_${decodedText}`;
+            document.getElementById('bot-link.href = deepLinkUrl;
+
             document.getElementById('result-box').style.display = 'block';
 
             if (tg.HapticFeedback) {
                 tg.HapticFeedback.notificationOccurred('success');
-            }
-        }
-
-function sendDataToBot() {
-            if (foundData) {
-                // Отправляем данные в бота
-                tg.sendData(foundData);
-                // Немного ждем перед закрытием, чтобы точно отправилось
-                setTimeout(() => {
-                    tg.close();
-                }, 500);
             }
         }
 
