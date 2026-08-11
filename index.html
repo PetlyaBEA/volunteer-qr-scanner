@@ -69,7 +69,6 @@
 
         <div id="result-box">
             <p id="scanned-text" style="color: #4cd964; font-weight: bold; margin-bottom: 8px;"></p>
-            <!-- Ссылка сразу открывает твоего бота с переданным ID! -->
             <a id="bot-link" href="#" class="btn">🚀 Открыть профиль в боте</a>
         </div>
     </div>
@@ -79,16 +78,13 @@
         tg.ready();
         tg.expand();
 
-        // Сюда вставь имя своего бота в телеграме (без @)
         const BOT_USERNAME = "JasVolonteers_bot";
 
         function onScanSuccess(decodedText) {
-            // decodedText должен быть вида user_123456
             document.getElementById('scanned-text').innerText = "✅ Успешно считано!";
 
-            // Формируем ссылку на бота с deep link (например t.me/bot?start=scan_123456)
             const deepLinkUrl = `https://t.me/${BOT_USERNAME}?start=scan_${decodedText}`;
-            document.getElementById('bot-link.href = deepLinkUrl;
+            document.getElementById('bot-link').href = deepLinkUrl;
 
             document.getElementById('result-box').style.display = 'block';
 
