@@ -69,6 +69,7 @@
 
         <div id="result-box">
             <p id="scanned-text" style="color: #4cd964; font-weight: bold; margin-bottom: 8px;"></p>
+            <!-- Ссылка открывает профиль через deep link -->
             <a id="bot-link" href="#" class="btn">🚀 Открыть профиль в боте</a>
         </div>
     </div>
@@ -83,6 +84,7 @@
         function onScanSuccess(decodedText) {
             document.getElementById('scanned-text').innerText = "✅ Успешно считано!";
 
+            // Формируем ссылку вида t.me/JasVolonteers_bot?start=scan_user_123456
             const deepLinkUrl = `https://t.me/${BOT_USERNAME}?start=scan_${decodedText}`;
             document.getElementById('bot-link').href = deepLinkUrl;
 
