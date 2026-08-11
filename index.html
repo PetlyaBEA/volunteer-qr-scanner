@@ -88,10 +88,14 @@
             }
         }
 
-        function sendDataToBot() {
+function sendDataToBot() {
             if (foundData) {
+                // Отправляем данные в бота
                 tg.sendData(foundData);
-                tg.close();
+                // Немного ждем перед закрытием, чтобы точно отправилось
+                setTimeout(() => {
+                    tg.close();
+                }, 500);
             }
         }
 
