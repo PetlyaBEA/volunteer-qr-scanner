@@ -55,8 +55,6 @@
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
             margin-top: 10px;
         }
     </style>
@@ -69,7 +67,7 @@
 
         <div id="result-box">
             <p id="scanned-text" style="color: #4cd964; font-weight: bold; margin-bottom: 8px;"></p>
-            <a id="bot-link" href="#" class="btn">🚀 Открыть профиль в боте</a>
+            <button class="btn" onclick="sendDataToBot()">📤 Отправить боту</button>
         </div>
     </div>
 
@@ -78,20 +76,24 @@
         tg.ready();
         tg.expand();
 
-        const BOT_USERNAME = "JasVolonteers_bot";
+        let scannedResult = "";
 
         function onScanSuccess(decodedText) {
-            const cleanText = decodedText.replace(/[^a-zA-Z0-9_]/g, '');
+            // Очищаем текст, оставляя только цифры и буквы (например user_123456)
+            scannedResult = decodedText.replace(/[^a-zA-Z0-9_]/g, '');
 
-            document.getElementById('scanned-text').innerText = "✅ Считано: " + cleanText;
-
-            const deepLinkUrl = `https://t.me/${BOT_USERNAME}?start=scan_${cleanText}`;
-            document.getElementById('bot-link').href = deepLinkUrl;
-
+            document.getElementById('scanned-text').innerText = "✅ Считано: " + scannedResult;
             document.getElementById('result-box').style.display = 'block';
 
             if (tg.HapticFeedback) {
                 tg.HapticFeedback.notificationOccurred('success');
+            }
+        }
+
+        function sendDataToBot() {
+            if (scannedResult) {
+                // Отправляем данные в бота через официальный метод WebApp
+                tg.sendData(scannedResult);
             }
         }
 
