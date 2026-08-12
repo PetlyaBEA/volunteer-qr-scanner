@@ -95,7 +95,7 @@
         document.getElementById('send-btn').addEventListener('click', function() {
             if (scannedResult) {
                 // ВНИМАНИЕ: Замените YOUR_BOT_USERNAME на реальный юзернейм вашего бота (без @)
-                const botUsername = "YOUR_BOT_USERNAME";
+                const botUsername = "@JasVolonteeres_bot";
 
                 // Используем встроенный в ваш admin.py обработчик через ссылку
                 tg.openTelegramLink(`https://t.me/${botUsername}?start=scan_${scannedResult}`);
