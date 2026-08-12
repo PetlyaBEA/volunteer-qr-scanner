@@ -94,7 +94,11 @@
 
         document.getElementById('send-btn').addEventListener('click', function() {
             if (scannedResult) {
-                tg.sendData(scannedResult);
+                // ВНИМАНИЕ: Замените YOUR_BOT_USERNAME на реальный юзернейм вашего бота (без @)
+                const botUsername = "YOUR_BOT_USERNAME";
+
+                // Используем встроенный в ваш admin.py обработчик через ссылку
+                tg.openTelegramLink(`https://t.me/${botUsername}?start=scan_${scannedResult}`);
             } else {
                 alert("QR-код еще не считан!");
             }
