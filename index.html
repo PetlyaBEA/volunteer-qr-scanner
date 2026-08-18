@@ -67,7 +67,7 @@
 
         <div id="result-box">
             <p id="scanned-text" style="color: #4cd964; font-weight: bold; margin-bottom: 8px;"></p>
-            <button id="send-btn" class="btn">📤 Отправить боту</button>
+            <button id="send-btn" class="btn">✅ Подтвердить</button>
         </div>
     </div>
 
@@ -93,15 +93,14 @@
         }
 
         document.getElementById('send-btn').addEventListener('click', function() {
-            if (scannedResult) {
-                // ВНИМАНИЕ: Замените YOUR_BOT_USERNAME на реальный юзернейм вашего бота (без @)
-                const botUsername = "JasVolonteeres_bot";
-
-                // Используем встроенный в ваш admin.py обработчик через ссылку
-                tg.openTelegramLink(`https://t.me/${botUsername}?start=scan_${scannedResult}`);
-            } else {
-                alert("QR-код еще не считан!");
+            if (!scannedResult) {
+                alert("QR-код ещё не считан!");
+                return;
             }
+
+            // Передаём QR прямо в Telegram-бот как message.web_app_data.
+            // Сканер должен быть открыт через WebApp-кнопку reply-клавиатуры бота.
+            tg.sendData(scannedResult);
         });
 
         html5QrCode.start(
